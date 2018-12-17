@@ -5,40 +5,35 @@ metadata:
   labels:
     app: python
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: python
+
   template:
     metadata:
       labels:
         app: python
+
     spec:
       containers:
       - name: python
-        image: python-hostname:v4
+        image: python-hostname:v5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
-
-        resources:
-          requests:
-            memory: "300Mi"
-            cpu: "250m" # 1/4 core
-          limits:
-            memory: "400Mi"
-            cpu: "1000m" # 1 core
 
         livenessProbe:
           httpGet:
             port: http
             path: /
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 5
-          timeoutSeconds: 2
+          timeoutSeconds: 1
+
         readinessProbe:
           httpGet:
-            path: /health
+            path: /
             port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
