@@ -2,7 +2,6 @@ from flask import Flask
 import sys
 import optparse
 import time
-import socket
 
 
 app = Flask(__name__)
@@ -12,7 +11,7 @@ start = int(round(time.time()))
 @app.route("/")
 def hello_world():
 
-    return "Hello world from %s : socket.gethostname()"
+    return "Hello world!!"
 
 if __name__ == '__main__':
     parser = optparse.OptionParser(usage="python simpleapp.py -p ")

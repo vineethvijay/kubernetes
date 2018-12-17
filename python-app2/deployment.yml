@@ -5,7 +5,7 @@ metadata:
   labels:
     app: python
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: python
@@ -20,3 +20,25 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
+
+        resources:
+          requests:
+            memory: "300Mi"
+            cpu: "250m" # 1/4 core
+          limits:
+            memory: "400Mi"
+            cpu: "1000m" # 1 core
+
+        livenessProbe:
+          httpGet:
+            port: http
+            path: /
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 3
