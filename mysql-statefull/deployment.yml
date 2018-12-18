@@ -1,28 +1,17 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: mysql
-spec:
-  replicas: 3
-
-  selector:
-    app: mysql
-  type: NodePort
-  ports:
-  - port: 3306
-    #nodePort: 30000
-
----
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: mysql
 spec:
+  replicas: 3
+
+  strategy:
+    type: Recreate
+
   selector:
     matchLabels:
       app: mysql
-  strategy:
-    type: Recreate
+
   template:
     metadata:
       labels:
@@ -35,12 +24,15 @@ spec:
         # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
           value: root
+
         ports:
         - containerPort: 3306
           name: mysql
+
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:

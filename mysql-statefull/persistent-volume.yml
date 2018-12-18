@@ -10,8 +10,9 @@ spec:
     storage: 10Gi
   accessModes:
   - ReadWriteOnce
+  # Create the mount directory in node (for minikube if you use it, --> `,login `minikube ssh` and mkdir)
   hostPath:
-    path: "/mnt/data"
+    path: "/mnt/data1"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
