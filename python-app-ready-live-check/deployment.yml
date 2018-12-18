@@ -5,7 +5,15 @@ metadata:
   labels:
     app: python
 spec:
+<<<<<<< HEAD
   replicas: 3
+=======
+<<<<<<< HEAD:python-app-ready-live-check/deployment.yml
+  replicas: 5
+=======
+  replicas: 3
+>>>>>>> ac87bcce1d0cdc7c79b18924a6d7226e075dcfe9:python-app-ready-live-check/deployment.yml
+>>>>>>> master
   selector:
     matchLabels:
       app: python
@@ -27,7 +35,15 @@ spec:
           httpGet:
             port: http
             path: /
+<<<<<<< HEAD
           initialDelaySeconds: 3
+=======
+<<<<<<< HEAD:python-app-ready-live-check/deployment.yml
+          initialDelaySeconds: 3
+=======
+          initialDelaySeconds: 5
+>>>>>>> ac87bcce1d0cdc7c79b18924a6d7226e075dcfe9:python-app-ready-live-check/deployment.yml
+>>>>>>> master
           periodSeconds: 5
           timeoutSeconds: 1
 
