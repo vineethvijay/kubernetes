@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.2
+        ports:
+        - containerPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+spec:
+  selector:
+    app: elasticsearch
+  ports:
+    - name: management
+      port: 9200
+    - name: zen
+      port: 9300
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:2.4.4
+        args:
+           - -Des.insecure.allow.root=true
+           - -Des.cluster.name=graylog
+           - -Des.discovery.zen.ping.unicast.hosts=graylog:9350
+           - -Des.discovery.zen.ping.multicast.enabled=false
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog
+spec:
+  selector:
+    app: graylog
+  type: NodePort
+  ports:
+  - port: 9000
+    #nodePort: 30000
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: graylog
+  labels:
+    app: graylog
+spec:
+  template:
+    metadata:
+      labels:
+        app: graylog
+    spec:
+      containers:
+        - name: graylog
+          image: graylog2/server:2.2.3-1
+          env:
+            - name: GRAYLOG_MONGODB_URI
+              value: mongodb://mongodb/graylog
+            - name : GRAYLOG_PASSWORD_SECRET
+              value: "somepasswordpepper"
+            - name: GRAYLOG_ROOT_PASSWORD_SHA2
+              value: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+            - name: GRAYLOG_WEB_ENDPOINT_URI
+              # change this to minikube_ip:service_port/api
+              value: "http://192.168.99.100:30961/api"
+            - name: ELASTICSEARCH_DISCOVERY_ZEN_PING_MULTICAST_ENABLED
+              value: "false"
+            - name: ELASTICSEARCH_DISCOVERY_ZEN_PING_UNICAST_HOSTS
+              value: "elasticsearch:9300"
+          ports:
+            - containerPort: 9000
