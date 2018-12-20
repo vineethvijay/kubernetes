@@ -32,7 +32,7 @@ metadata:
   labels:
     app: wordpress
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: wordpress
@@ -50,7 +50,7 @@ spec:
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql:32700
+          value: wordpress-mysql
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:

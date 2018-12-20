@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: python
-        image: python-hostname:v5
+        image: vineethvijay/python-count_hostname-app
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

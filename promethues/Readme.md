@@ -4,3 +4,7 @@
 ### 2. Run cluster role
 ### 3. Run Config map
 ### 4. Run Deployment and Service
+
+# OR
+
+## Run `kubectl create -f <directory>`
