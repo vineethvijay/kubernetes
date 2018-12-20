@@ -1,0 +1,13 @@
+{
+  "name": "docker-debian-hello-world",
+  "private": true,
+  "version": "0.0.2",
+  "description": "Node.js Hello World app on Debian using docker",
+  "author": "",
+  "dependencies": {
+    "express": "4.16.1"
+  },
+  "scripts": {
+    "start": "node ./index.js"
+  }
+}
