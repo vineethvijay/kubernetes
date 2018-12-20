@@ -16,7 +16,13 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: vineethvijay/nodejs-simple
+        image: vineethvijay/nodejs-simple:v2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 5
