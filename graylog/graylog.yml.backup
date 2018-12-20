@@ -88,7 +88,7 @@ spec:
     spec:
       containers:
         - name: graylog
-          image: graylog/graylog:3.0
+          image: graylog2/server:2.2.3-1
           env:
             - name: GRAYLOG_MONGODB_URI
               value: mongodb://mongodb/graylog

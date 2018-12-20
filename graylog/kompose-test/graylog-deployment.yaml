@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: graylog
+  name: graylog
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: graylog
+    spec:
+      containers:
+      - env:
+        - name: GRAYLOG_PASSWORD_SECRET
+          value: somepasswordpepper
+        - name: GRAYLOG_ROOT_PASSWORD_SHA2
+          value: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+        - name: GRAYLOG_WEB_ENDPOINT_URI
+          value: http://127.0.0.1:9000/api
+        image: graylog/graylog:3.0
+        name: graylog
+        ports:
+        - containerPort: 9000
+        - containerPort: 514
+        - containerPort: 514
+          protocol: UDP
+        - containerPort: 12201
+        - containerPort: 12201
+          protocol: UDP
+        resources: {}
+      restartPolicy: Always
+status: {}
