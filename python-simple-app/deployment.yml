@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python
-        image: python-app
+        image: vineethvijay/python-simple-app
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

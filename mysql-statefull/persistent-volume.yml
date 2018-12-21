@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 10Gi
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   # Create the mount directory in node (for minikube if you use it, --> `,login `minikube ssh` and mkdir)
   hostPath:
     path: "/mnt/data1"

@@ -45,14 +45,10 @@ List services,
 
 
 ### Accessing the applications
-Get minikube IP by running `minikube ip`
 
-Since the demos expose the services over `NodePort`
+Endpoint would be (as we use service type `NodePort` )
 
-Get the service port by,
-```kubectl get services```
-
-Applications endpoint would be `<minikube-ip>:servicePort`
+`echo $(minikube ip):$(kubectl get service/<service-name> -o jsonpath="{.spec.ports[*].nodePort}")`
 
 ## OR,
 
