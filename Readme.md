@@ -52,7 +52,7 @@ Since the demos expose the services over `NodePort`
 Get the service port by,
 ```kubectl get services```
 
-Applications endpoint would be <minikube-ip>:servicePort
+Applications endpoint would be `<minikube-ip>:servicePort`
 
 ## OR,
 
