@@ -1,0 +1,4 @@
+<role rolename="manager"/>
+<role rolename="manager-gui"/>
+<role rolename="admin"/>
+<user username="user" password="password" roles="admin,manager,manager-gui"/>

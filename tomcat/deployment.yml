@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tomcat-deployment-rolling-update
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        role: rolling-update
+    spec:
+      containers:
+      - name: tomcat-container
+        image: tomcat:9-jre8-alpine
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 1
