@@ -7,6 +7,7 @@ RUN /usr/local/bin/install-plugins.sh ssh-slaves
 RUN /usr/local/bin/install-plugins.sh email-ext
 RUN /usr/local/bin/install-plugins.sh mailer
 RUN /usr/local/bin/install-plugins.sh slack
+#RUN /usr/local/bin/install-plugins.sh pipeline
 
 # Artifacts
 RUN /usr/local/bin/install-plugins.sh htmlpublisher
