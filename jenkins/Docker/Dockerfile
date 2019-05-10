@@ -21,5 +21,7 @@ RUN /usr/local/bin/install-plugins.sh kubernetes
 
 # install Maven
 USER root
+RUN chown -R 1000:1000 /var/jenkins_home
+
 RUN apt-get update && apt-get install -y maven
 USER jenkins
