@@ -43,6 +43,7 @@ List services,
 `kubectl get services`
 
 To create docker images in minikube docker env,
+
 `eval $(minikube docker-env)`
 
 
