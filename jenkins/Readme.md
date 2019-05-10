@@ -3,6 +3,8 @@
 Build the jenkins-master in minikube docker env
 `eval $(minikube docker-env)`
 
+Run `sudo chown -R 1000:1000 <mount-path>` in minikube node. login using `minikube ssh`
+
 1.Configure Jenkins-->configure system--> cloud--> kubernetes with
 
 a. URL: obtain by `kubectl cluster-info | grep master`
@@ -12,7 +14,7 @@ b. Jenkins url : Find `ip` from `kubectl describe pod jenkins-****` . Configure 
 
 Pod template 
     - pod label - <label>
-    - image: https://hub.docker.com/r/jenkinsci/jnlp-slave/
+    - image: https://hub.docker.com/r/jenkinsci/jnlp-slave/ , jenkins/jnlp-slave
     
 2.Update master nodes executor to '0' for making sure builds use kubernetes pods executors
 
