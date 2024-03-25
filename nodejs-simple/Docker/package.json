@@ -6,7 +6,7 @@
   "author": "",
   "dependencies": {
     "dateformat": "^3.0.3",
-    "express": "4.16.1",
+    "express": "4.19.2",
     "os": [
       "darwin",
       "linux"
