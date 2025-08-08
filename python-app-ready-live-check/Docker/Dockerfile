@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:24.10
 
 # Update
 RUN apt-get update && apt-get install python  -y
